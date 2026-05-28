@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HostelOS — ERP Completo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --fh:'Fraunces',serif;
+  --fb:'DM Sans',sans-serif;
+  --bg:#0e0b08;
+  --s1:#171310;
+  --s2:#1f1b17;
+  --s3:#28231d;
+  --s4:#332b23;
+  --b1:rgba(255,230,200,0.07);
+  --b2:rgba(255,230,200,0.13);
+  --b3:rgba(255,230,200,0.22);
+  --t1:#f5ede0;
+  --t2:#a89880;
+  --t3:#6a5e52;
+  --ac:#c96b38;
+  --acl:#e08a58;
+  --acd:rgba(201,107,56,0.16);
+  --gr:#56b997;
+  --grd:rgba(86,185,151,0.13);
+  --rd:#cc6666;
+  --rdd:rgba(204,102,102,0.13);
+  --am:#c49535;
+  --amd:rgba(196,149,53,0.13);
+  --cy:#4fafc0;
+  --cyd:rgba(79,175,192,0.13);
+  --pk:#b56880
+}
+html,body{height:100%;font-family:var(--fb);background:var(--bg);color:var(--t1);font-size:15px;line-height:1.5}
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* ── SIDEBAR ── */
+.sidebar{width:240px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;position:relative}
+.sidebar::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.012'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.logo-wrap{padding:26px 22px 20px;border-bottom:1px solid var(--b1)}
+.logo{font-family:var(--fh);font-size:22px;font-weight:700;color:var(--t1);font-style:italic;letter-spacing:-.3px}
+.logo em{color:var(--acl);font-style:normal;font-weight:300}
+.logo-sub{font-size:11px;color:var(--t3);margin-top:4px;letter-spacing:.8px;text-transform:uppercase}
+.nav{flex:1;padding:14px 12px;overflow-y:auto}
+.ns{font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:1.4px;color:var(--t3);padding:16px 10px 7px;opacity:.7}
+.nb{display:flex;align-items:center;gap:11px;width:100%;padding:10px 13px;border-radius:12px;border:none;background:none;color:var(--t2);font-family:var(--fb);font-size:13.5px;cursor:pointer;transition:all .18s;text-align:left;position:relative;font-weight:400}
+.nb:hover{background:var(--s2);color:var(--t1)}
+.nb.active{background:var(--acd);color:var(--acl);font-weight:500}
+.nb.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:20px;background:var(--ac);border-radius:0 4px 4px 0}
+.nb i{font-size:17px;flex-shrink:0;opacity:.85}
+.sf{padding:16px 12px;border-top:1px solid var(--b1);margin-top:auto}
+.ur{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:12px;cursor:pointer;transition:all .18s}
+.ur:hover{background:var(--s2)}
+.av{width:35px;height:35px;border-radius:50%;background:linear-gradient(145deg,var(--ac),var(--pk));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0;font-family:var(--fh);font-style:italic;position:relative}
+.av::after{content:'';position:absolute;bottom:0;right:0;width:9px;height:9px;border-radius:50%;background:#56b997;border:2px solid var(--s1)}
+.un{font-size:13px;font-weight:500;color:var(--t1)}.ur2{font-size:11px;color:var(--t3);margin-top:1px}
+
+/* ── TOPBAR ── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.topbar{height:62px;background:var(--s1);border-bottom:1px solid var(--b1);display:flex;align-items:center;padding:0 28px;gap:14px;flex-shrink:0}
+.tbt{font-family:var(--fh);font-size:19px;font-weight:700;font-style:italic;flex:1;color:var(--t1);letter-spacing:-.2px}
+.tbd{font-size:12px;color:var(--t3);background:var(--s2);padding:5px 14px;border-radius:100px;border:1px solid var(--b1);letter-spacing:.2px}
+.tbs{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--b1);border-radius:100px;padding:7px 16px;min-width:210px;transition:border .18s}
+.tbs:focus-within{border-color:var(--b3)}
+.tbs i{color:var(--t3);font-size:15px;flex-shrink:0}.tbs input{background:none;border:none;outline:none;font-family:var(--fb);font-size:13px;color:var(--t1);width:100%}.tbs input::placeholder{color:var(--t3)}
+.nt{width:38px;height:38px;border-radius:100px;background:var(--s2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:all .18s}
+.nt:hover{border-color:var(--b2);background:var(--s3)}.nt i{color:var(--t2);font-size:17px}
+.nd{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--rd);border:2px solid var(--s1)}
+
+/* ── CONTENT ── */
+.content{flex:1;overflow-y:auto;padding:26px 28px;background:var(--bg)}
+.panel{display:none}.panel.active{display:block}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:26px}
+.ph-t{font-family:var(--fh);font-size:24px;font-weight:700;font-style:italic;line-height:1.2;letter-spacing:-.3px}
+.ph-s{font-size:13.5px;color:var(--t2);margin-top:4px}
+.ph-a{display:flex;gap:8px;align-items:center}
+
+/* ── STAT CARDS ── */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.sc{background:var(--s1);border:1px solid var(--b1);border-radius:18px;padding:20px 22px 18px 26px;position:relative;overflow:hidden;transition:all .2s}
+.sc:hover{border-color:var(--b2);transform:translateY(-1px)}
+.sc::before{content:'';position:absolute;top:20px;left:0;width:3px;bottom:20px;border-radius:0 3px 3px 0;opacity:0}
+.sc.hl::before{background:var(--ac);opacity:1}
+.sc.hl-g::before{background:var(--gr);opacity:1}
+.sc.hl-r::before{background:var(--rd);opacity:1}
+.sc.hl-a::before{background:var(--am);opacity:1}
+.sl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:10px}
+.sv{font-family:var(--fh);font-size:32px;font-weight:700;line-height:1;margin-bottom:9px;font-style:italic}
+.sv.mn::before{content:'R$';font-size:15px;font-weight:300;color:var(--t3);vertical-align:super;margin-right:3px;font-style:normal}
+.sb{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;padding:3px 10px;border-radius:100px;font-weight:500}
+.sb-up{background:var(--grd);color:var(--gr)}.sb-dn{background:var(--rdd);color:var(--rd)}.sb-n{background:var(--s3);color:var(--t2)}
+.si{position:absolute;right:18px;top:18px;width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.si-p{background:var(--acd);color:var(--acl)}.si-g{background:var(--grd);color:var(--gr)}.si-r{background:var(--rdd);color:var(--rd)}.si-a{background:var(--amd);color:var(--am)}
+
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.g13{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.g31{display:grid;grid-template-columns:1fr 1.4fr;gap:16px}
+
+/* ── CARDS ── */
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:18px;padding:22px}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ct{font-family:var(--fh);font-size:14px;font-weight:600;font-style:italic;letter-spacing:-.1px}
+.cs{font-size:12px;color:var(--t3);margin-top:1px}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:100px;border:1px solid var(--b2);background:var(--s2);color:var(--t1);font-family:var(--fb);font-size:13.5px;font-weight:500;cursor:pointer;transition:all .18s;white-space:nowrap}
+.btn:hover{background:var(--s3);border-color:var(--b3)}.btn i{font-size:15px}
+.btn:active{transform:scale(.97)}
+.btn-p{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+.btn-p:hover{background:var(--acl);border-color:var(--acl)}
+.btn-sm{padding:6px 14px;font-size:12.5px}
+.btn-xs{padding:4px 10px;font-size:12px}
+.btn-d{background:var(--rdd);border-color:rgba(204,102,102,.25);color:var(--rd)}
+.btn-s{background:var(--grd);border-color:rgba(86,185,151,.25);color:var(--gr)}
+.btn-g{background:transparent;border-color:transparent;color:var(--t2)}.btn-g:hover{background:var(--s2);color:var(--t1);border-color:transparent}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;padding:3px 10px;border-radius:100px;font-weight:500;white-space:nowrap}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.bg-g{background:var(--grd);color:var(--gr)}.bg-r{background:var(--rdd);color:var(--rd)}.bg-a{background:var(--amd);color:var(--am)}.bg-c{background:var(--cyd);color:var(--cy)}.bg-p{background:var(--acd);color:var(--acl)}.bg-n{background:var(--s3);color:var(--t2)}
+
+/* ── FORMS ── */
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.fl{font-size:12.5px;font-weight:500;color:var(--t2);letter-spacing:.1px}
+.fi{background:var(--s2);border:1.5px solid var(--b1);color:var(--t1);font-family:var(--fb);font-size:14px;padding:10px 14px;border-radius:12px;outline:none;width:100%;transition:all .18s}
+.fi:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--acd)}
+.fi::placeholder{color:var(--t3)}select.fi{cursor:pointer}
+.fr{display:grid;gap:12px}.fr2{grid-template-columns:1fr 1fr}.fr3{grid-template-columns:1fr 1fr 1fr}
+
+/* ── TABLE ── */
+.tw{overflow-x:auto}
+table.dt{width:100%;border-collapse:collapse}
+.dt th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.9px;color:var(--t3);padding:10px 16px;border-bottom:1px solid var(--b1)}
+.dt td{padding:13px 16px;border-bottom:1px solid var(--b1);font-size:14px;color:var(--t1);vertical-align:middle}
+.dt tr:last-child td{border-bottom:none}
+.dt tbody tr{transition:background .15s}
+.dt tbody tr:hover td{background:var(--s2)}
+
+/* ── ROOM GRID ── */
+.rm{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.rt{border-radius:16px;padding:16px 10px;border:1px solid var(--b1);cursor:pointer;transition:all .2s;background:var(--s1);text-align:center}
+.rt:hover{transform:translateY(-3px);border-color:var(--b2)}
+.rt-n{font-family:var(--fh);font-size:22px;font-weight:700;margin-bottom:4px;line-height:1;font-style:italic}
+.rt-t{font-size:10px;color:var(--t3);margin-bottom:8px;line-height:1.3}
+.rt-p{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:100px;display:inline-block}
+.rt-g{font-size:11px;color:var(--t2);margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.t-av{border-color:rgba(86,185,151,.25);background:rgba(86,185,151,.04)}.t-av .rt-n{color:var(--gr)}.t-av .rt-p{background:var(--grd);color:var(--gr)}
+.t-oc{border-color:rgba(204,102,102,.25);background:rgba(204,102,102,.04)}.t-oc .rt-n{color:var(--rd)}.t-oc .rt-p{background:var(--rdd);color:var(--rd)}
+.t-cl{border-color:rgba(196,149,53,.25);background:rgba(196,149,53,.04)}.t-cl .rt-n{color:var(--am)}.t-cl .rt-p{background:var(--amd);color:var(--am)}
+.t-mn{border-color:rgba(201,107,56,.25);background:rgba(201,107,56,.04)}.t-mn .rt-n{color:var(--acl)}.t-mn .rt-p{background:var(--acd);color:var(--acl)}
+
+/* ── CHART ── */
+.bc{display:flex;align-items:flex-end;gap:8px;height:100px}
+.bcc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bcb{width:100%;border-radius:6px 6px 0 0;min-height:4px}
+.bcl{font-size:11px;color:var(--t3)}.bcv{font-size:11px;color:var(--t2);font-weight:500}
+.ob{background:var(--s3);border-radius:100px;height:5px;overflow:hidden;margin-top:6px}
+.of{height:100%;border-radius:100px;background:var(--ac)}
+
+/* ── LIST ITEMS ── */
+.li{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--b1)}
+.li:last-child{border-bottom:none}
+.ld{font-size:14px}.ls{font-size:12px;color:var(--t3);margin-top:2px}
+.lv{font-family:var(--fh);font-size:15px;font-weight:600;font-style:italic}
+.lp{color:var(--gr)}.ln{color:var(--rd)}
+
+/* ── STEPPER ── */
+.stpr{display:flex;border-bottom:1px solid var(--b1);margin-bottom:20px}
+.step{flex:1;padding:10px;text-align:center;font-size:13px;font-weight:500;color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;transition:all .18s;margin-bottom:-1px}
+.step.active{color:var(--acl);border-color:var(--ac)}.step.done{color:var(--gr);border-color:var(--gr)}
+
+/* ── MISC COMPONENTS ── */
+.cir{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;background:var(--s2);border-radius:14px;border:1px solid var(--b1);margin-bottom:8px;cursor:pointer;transition:all .18s}
+.cir:hover{border-color:var(--ac)}
+.ai{padding:13px 15px;border-radius:13px;margin-bottom:8px;border-left:3px solid;background:var(--s2)}
+.ai-r{border-color:var(--rd)}.ai-a{border-color:var(--am)}.ai-p{border-color:var(--ac)}.ai-g{border-color:var(--gr)}
+.at{font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.ad{font-size:13px;color:var(--t2)}
+.hc{display:flex;align-items:center;gap:12px;padding:13px 15px;background:var(--s2);border-radius:14px;border:1px solid var(--b1);margin-bottom:8px;cursor:pointer;transition:all .18s}
+.hc:hover{border-color:var(--b2)}
+.hca{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;font-family:var(--fh);font-style:italic}
+
+/* ── MODAL ── */
+.ov{display:none;position:fixed;inset:0;background:rgba(8,6,4,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center}
+.ov.open{display:flex}
+.mb{background:var(--s1);border:1px solid var(--b2);border-radius:22px;padding:32px;width:530px;max-width:95vw;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.mh{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.mt{font-family:var(--fh);font-size:20px;font-weight:700;font-style:italic;letter-spacing:-.2px}
+.mx{background:var(--s2);border:1px solid var(--b1);border-radius:100px;color:var(--t2);cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .18s}
+.mx:hover{background:var(--s3);color:var(--t1)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);z-index:600;background:var(--s1);border:1px solid var(--b2);border-radius:100px;padding:12px 22px;font-size:13.5px;color:var(--t1);opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:10px;pointer-events:none;min-width:240px;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.td{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── ROOM SECTIONS ── */
+.rs{margin-bottom:22px}
+.rst{font-family:var(--fh);font-size:15px;font-weight:600;font-style:italic;margin-bottom:12px;display:flex;align-items:center;gap:10px;letter-spacing:-.1px}
+
+/* ── UTILS ── */
+.fx{display:flex}.fxc{display:flex;align-items:center}.fxb{display:flex;align-items:center;justify-content:space-between}
+.gap6{gap:6px}.gap8{gap:8px}.gap12{gap:12px}.gap16{gap:16px}
+.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
+.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}.mb20{margin-bottom:20px}
+
+/* ── LIGHT MODE ── */
+
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .sidebar{width:62px}
+  .logo-wrap{padding:16px 10px}.logo em,.logo-sub{display:none}
+  .nb span{display:none}.nb{justify-content:center;padding:10px}
+  .nb.active::before{display:none}.un,.ur2{display:none}
+  .sg,.g2,.g3,.g13,.g31{grid-template-columns:1fr}.fr2,.fr3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+<div class="sidebar">
+  <div class="logo-wrap"><div class="logo"><em style="font-style:italic;font-weight:700;color:var(--t1)">Hostel</em><em style="color:var(--acl);font-weight:300;letter-spacing:-.5px">OS</em></div><div class="logo-sub">Sistema de gestão</div></div>
+  <nav class="nav">
+    <div class="ns">Principal</div>
+    <button class="nb active" onclick="nav('dashboard',this)"><i class="ti ti-layout-dashboard"></i><span>Dashboard</span></button>
+    <button class="nb" onclick="nav('quartos',this)"><i class="ti ti-bed"></i><span>Quartos</span></button>
+    <button class="nb" onclick="nav('reservas',this)"><i class="ti ti-calendar"></i><span>Reservas</span></button>
+    <div class="ns">Operação</div>
+    <button class="nb" onclick="nav('checkin',this)"><i class="ti ti-door-enter"></i><span>Check-in / Out</span></button>
+    <button class="nb" onclick="nav('financeiro',this)"><i class="ti ti-report-money"></i><span>Financeiro</span></button>
+    <div class="ns">Sistema</div>
+    <button class="nb" onclick="nav('config',this)"><i class="ti ti-settings"></i><span>Configurações</span></button>
+  </nav>
+  <div class="sf"><div class="ur"><div class="av">JH</div><div><div class="un">Jhony</div><div class="ur2">Recepção</div></div></div></div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <div class="tbt" id="tb-title">Dashboard</div>
+    <div class="tbs"><i class="ti ti-search"></i><input type="text" placeholder="Buscar hóspede, reserva..."></div>
+    <div class="tbd" id="tb-date"></div>
+    <div class="nt"><i class="ti ti-bell"></i><div class="nd"></div></div>
+  </div>
+  <div class="content">
+
+    <div class="panel active" id="panel-dashboard">
+      <div class="ph"><div><div class="ph-t">Visão Geral</div><div class="ph-s" id="dash-sub"></div></div><div class="ph-a"><button class="btn btn-sm" onclick="renderDash()"><i class="ti ti-refresh"></i>Atualizar</button><button class="btn btn-sm btn-p" onclick="openModal('modal-res',resetResForm)"><i class="ti ti-plus"></i>Nova Reserva</button></div></div>
+      <div class="sg" id="dash-stats"></div>
+      <div class="g13 mb16"><div class="card"><div class="ch"><div><div class="ct">Receita — 7 dias</div></div></div><div class="bc" id="dash-chart"></div></div><div class="card"><div class="ch"><div class="ct">Ocupação por tipo</div></div><div id="dash-occ"></div></div></div>
+      <div class="g2"><div class="card"><div class="ch"><div class="ct">Check-ins de hoje</div><button class="btn btn-xs" onclick="nav('checkin',null)">Ver todos</button></div><div id="dash-checkins"></div></div><div class="card"><div class="ch"><div class="ct">Alertas & Pendências</div></div><div id="dash-alerts"></div></div></div>
+    </div>
+
+    <div class="panel" id="panel-quartos">
+      <div class="ph"><div><div class="ph-t">Gestão de Quartos</div><div class="ph-s" id="qts-sub"></div></div><div class="ph-a"><select class="fi" style="width:auto;font-size:13px;padding:7px 12px" onchange="filterRooms(this.value)"><option value="all">Todos os status</option><option value="disponivel">Disponível</option><option value="ocupado">Ocupado</option><option value="limpeza">Limpeza</option><option value="manutencao">Manutenção</option></select><button class="btn btn-sm btn-p" onclick="openModal('modal-qrt',resetQrtForm)"><i class="ti ti-plus"></i>Novo Quarto</button></div></div>
+      <div class="fxc gap12 mb20" style="flex-wrap:wrap"><div class="fxc gap6"><div style="width:10px;height:10px;border-radius:50%;background:var(--gr)"></div><span style="font-size:13px;color:var(--t2)">Disponível</span></div><div class="fxc gap6"><div style="width:10px;height:10px;border-radius:50%;background:var(--rd)"></div><span style="font-size:13px;color:var(--t2)">Ocupado</span></div><div class="fxc gap6"><div style="width:10px;height:10px;border-radius:50%;background:var(--am)"></div><span style="font-size:13px;color:var(--t2)">Limpeza</span></div><div class="fxc gap6"><div style="width:10px;height:10px;border-radius:50%;background:var(--acl)"></div><span style="font-size:13px;color:var(--t2)">Manutenção</span></div></div>
+      <div id="qts-map"></div>
+    </div>
+
+    <div class="panel" id="panel-reservas">
+      <div class="ph"><div><div class="ph-t">Reservas</div><div class="ph-s" id="res-sub"></div></div><div class="ph-a"><input class="fi" style="width:220px;font-size:13px;padding:7px 12px" placeholder="Buscar hóspede..." oninput="filterRes(this.value)"><button class="btn btn-sm btn-p" onclick="openModal('modal-res',resetResForm)"><i class="ti ti-plus"></i>Nova Reserva</button></div></div>
+      <div class="card"><div class="tw"><table class="dt"><thead><tr><th>#</th><th>Hóspede</th><th>Quarto</th><th>Check-in</th><th>Check-out</th><th>Diária</th><th>Total</th><th>Origem</th><th>Status</th><th></th></tr></thead><tbody id="res-tbody"></tbody></table></div></div>
+    </div>
+
+    <div class="panel" id="panel-checkin">
+      <div class="ph"><div class="ph-t">Check-in / Check-out</div></div>
+      <div class="g31">
+        <div class="card">
+          <div class="ch"><div class="ct">Realizar Check-in</div></div>
+          <div class="stpr"><div class="step active" onclick="ciGo(0)">01 Reserva</div><div class="step" onclick="ciGo(1)">02 Hóspede</div><div class="step" onclick="ciGo(2)">03 Pagamento</div></div>
+          <div id="ci-s0"><div class="fg"><label class="fl">Buscar reserva por nome ou #</label><input class="fi" id="ci-search" placeholder="Nome ou número..." oninput="ciSearch(this.value)"></div><div id="ci-results"></div></div>
+          <div id="ci-s1" style="display:none">
+            <div class="fr fr2"><div class="fg"><label class="fl">Nome completo</label><input class="fi" id="ci-nome"></div><div class="fg"><label class="fl">Documento</label><input class="fi" id="ci-doc" placeholder="Passaporte / RG"></div></div>
+            <div class="fr fr2"><div class="fg"><label class="fl">Nacionalidade</label><input class="fi" id="ci-nac"></div><div class="fg"><label class="fl">E-mail</label><input class="fi" id="ci-email"></div></div>
+            <div class="fxc gap8 mt16"><button class="btn btn-g" onclick="ciGo(0)"><i class="ti ti-arrow-left"></i>Voltar</button><button class="btn btn-p" style="flex:1" onclick="ciGo(2)">Confirmar<i class="ti ti-arrow-right"></i></button></div>
+          </div>
+          <div id="ci-s2" style="display:none">
+            <div id="ci-resumo"></div>
+            <div class="fg mt16"><label class="fl">Forma de pagamento</label><select class="fi" id="ci-pagto"><option>PIX</option><option>Cartão de Crédito</option><option>Cartão de Débito</option><option>Dinheiro</option></select></div>
+            <div class="fxc gap8 mt16"><button class="btn btn-g" onclick="ciGo(1)"><i class="ti ti-arrow-left"></i>Voltar</button><button class="btn btn-p" style="flex:1" onclick="finalizarCheckin()"><i class="ti ti-check"></i>Finalizar Check-in</button></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="card"><div class="ch"><div class="ct">Check-outs hoje</div></div><div id="co-list"></div></div>
+          <div class="card"><div class="ch"><div class="ct">Hóspedes ativos</div></div><div id="hospedes-ativos" style="max-height:220px;overflow-y:auto"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-financeiro">
+      <div class="ph"><div><div class="ph-t">Financeiro & Caixa</div><div class="ph-s" id="fin-sub"></div></div><div class="ph-a"><button class="btn btn-sm" onclick="exportCSV()"><i class="ti ti-download"></i>Exportar CSV</button><button class="btn btn-sm btn-p" onclick="openModal('modal-lanc',resetLancForm)"><i class="ti ti-plus"></i>Lançamento</button></div></div>
+      <div class="g3 mb16" id="fin-metrics"></div>
+      <div class="g2 mb16"><div class="card"><div class="ch"><div class="ct">Caixa — Hoje</div><button class="btn btn-xs btn-s" onclick="showToast('Caixa fechado!','green')"><i class="ti ti-lock"></i>Fechar</button></div><div id="caixa-hoje"></div></div><div class="card"><div class="ch"><div class="ct">Formas de pagamento</div></div><div id="fin-pagtos"></div></div></div>
+      <div class="card"><div class="fxb mb16"><div class="ct">Extrato</div><select class="fi" style="width:auto;font-size:13px;padding:6px 10px" onchange="renderExtrato(this.value)"><option value="all">Todos</option><option value="entrada">Entradas</option><option value="saida">Saídas</option></select></div><div class="tw"><table class="dt"><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Forma</th><th>Tipo</th><th>Valor</th><th></th></tr></thead><tbody id="extrato-tbody"></tbody></table></div></div>
+    </div>
+
+    <div class="panel" id="panel-config">
+      <div class="ph"><div class="ph-t">Configurações</div></div>
+      <div class="g2">
+        <div class="card"><div class="ch"><div class="ct">Dados do Estabelecimento</div></div><div class="fg"><label class="fl">Nome</label><input class="fi" id="cfg-nome"></div><div class="fg"><label class="fl">Endereço</label><input class="fi" id="cfg-end"></div><div class="fr fr2"><div class="fg"><label class="fl">Telefone</label><input class="fi" id="cfg-tel"></div><div class="fg"><label class="fl">E-mail</label><input class="fi" id="cfg-email"></div></div><button class="btn btn-p mt12" onclick="saveConfig()"><i class="ti ti-check"></i>Salvar</button></div>
+        <div class="card"><div class="ch"><div class="ct">Tarifas por Acomodação</div><button class="btn btn-sm btn-p" onclick="saveTarifas()"><i class="ti ti-check"></i>Salvar</button></div><div id="tarifas-list"></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- MODAIS -->
+<div class="ov" id="modal-res"><div class="mb">
+  <div class="mh"><div class="mt" id="mr-title">Nova Reserva</div><button class="mx" onclick="closeModal('modal-res')"><i class="ti ti-x"></i></button></div>
+  <input type="hidden" id="r-id">
+  <div class="fr fr2"><div class="fg"><label class="fl">Nome *</label><input class="fi" id="r-nome"></div><div class="fg"><label class="fl">E-mail</label><input class="fi" id="r-email"></div></div>
+  <div class="fr fr3"><div class="fg"><label class="fl">Check-in *</label><input class="fi" type="date" id="r-cin"></div><div class="fg"><label class="fl">Check-out *</label><input class="fi" type="date" id="r-cout"></div><div class="fg"><label class="fl">Hóspedes</label><input class="fi" type="number" id="r-num" value="1" min="1"></div></div>
+  <div class="fr fr2"><div class="fg"><label class="fl">Quarto *</label><select class="fi" id="r-quarto"></select></div><div class="fg"><label class="fl">Diária R$ *</label><input class="fi" type="number" id="r-diaria" step="0.01"></div></div>
+  <div class="fr fr2"><div class="fg"><label class="fl">Origem</label><select class="fi" id="r-origem"><option>Direto</option><option>Booking.com</option><option>Airbnb</option><option>Walk-in</option><option>Outro</option></select></div><div class="fg"><label class="fl">Status</label><select class="fi" id="r-status"><option>pendente</option><option>hospedado</option><option>checkout</option><option>cancelado</option></select></div></div>
+  <div class="fg"><label class="fl">Observações</label><input class="fi" id="r-obs"></div>
+  <div class="fxc gap8 mt16"><button class="btn btn-g" onclick="closeModal('modal-res')">Cancelar</button><button class="btn btn-p" style="flex:1" onclick="saveRes()"><i class="ti ti-check"></i>Salvar Reserva</button></div>
+</div></div>
+
+<div class="ov" id="modal-qrt"><div class="mb">
+  <div class="mh"><div class="mt" id="mq-title">Novo Quarto</div><button class="mx" onclick="closeModal('modal-qrt')"><i class="ti ti-x"></i></button></div>
+  <input type="hidden" id="q-id">
+  <div class="fr fr2"><div class="fg"><label class="fl">Nome/Número *</label><input class="fi" id="q-nome"></div><div class="fg"><label class="fl">Tipo</label><select class="fi" id="q-tipo"><option>Beliche Dorm</option><option>Cama Individual Dorm</option><option>Privativo Casal</option><option>Privativo Twin</option><option>Suíte</option></select></div></div>
+  <div class="fr fr2"><div class="fg"><label class="fl">Capacidade</label><input class="fi" type="number" id="q-cap" value="1" min="1"></div><div class="fg"><label class="fl">Diária R$</label><input class="fi" type="number" id="q-diaria" step="0.01"></div></div>
+  <div class="fr fr2"><div class="fg"><label class="fl">Status</label><select class="fi" id="q-status"><option value="disponivel">Disponível</option><option value="ocupado">Ocupado</option><option value="limpeza">Limpeza</option><option value="manutencao">Manutenção</option></select></div><div class="fg"><label class="fl">Andar</label><input class="fi" id="q-andar"></div></div>
+  <div class="fg"><label class="fl">Observações</label><input class="fi" id="q-obs"></div>
+  <div class="fxc gap8 mt16"><button class="btn btn-g" onclick="closeModal('modal-qrt')">Cancelar</button><button class="btn btn-p" style="flex:1" onclick="saveQrt()"><i class="ti ti-check"></i>Salvar</button></div>
+</div></div>
+
+<div class="ov" id="modal-lanc"><div class="mb">
+  <div class="mh"><div class="mt">Novo Lançamento</div><button class="mx" onclick="closeModal('modal-lanc')"><i class="ti ti-x"></i></button></div>
+  <div class="fr fr2"><div class="fg"><label class="fl">Tipo *</label><select class="fi" id="l-tipo"><option value="entrada">Entrada</option><option value="saida">Saída</option></select></div><div class="fg"><label class="fl">Valor R$ *</label><input class="fi" type="number" id="l-valor" step="0.01"></div></div>
+  <div class="fg"><label class="fl">Descrição *</label><input class="fi" id="l-desc"></div>
+  <div class="fr fr2"><div class="fg"><label class="fl">Categoria</label><select class="fi" id="l-cat"><option>Hospedagem</option><option>F&B</option><option>Operacional</option><option>Fixo</option><option>Manutenção</option><option>Outros</option></select></div><div class="fg"><label class="fl">Forma</label><select class="fi" id="l-forma"><option>PIX</option><option>Cartão de Crédito</option><option>Cartão de Débito</option><option>Dinheiro</option></select></div></div>
+  <div class="fxc gap8 mt16"><button class="btn btn-g" onclick="closeModal('modal-lanc')">Cancelar</button><button class="btn btn-p" style="flex:1" onclick="saveLanc()"><i class="ti ti-check"></i>Salvar</button></div>
+</div></div>
+
+<div class="ov" id="modal-room"><div class="mb" style="width:420px">
+  <div class="mh"><div class="mt" id="mroom-title"></div><button class="mx" onclick="closeModal('modal-room')"><i class="ti ti-x"></i></button></div>
+  <div id="mroom-body"></div>
+</div></div>
+
+<div class="toast" id="toast"><div class="td" id="tdot"></div><span id="tmsg"></span></div>
+
+<script>
+const KEY='hostelOS_v4';
+let DB=loadDB(),ciRes=null;
+function loadDB(){const d=localStorage.getItem(KEY);if(d)return JSON.parse(d);const t=new Date().toISOString().slice(0,10),tm=new Date(Date.now()+86400000).toISOString().slice(0,10),ys=new Date(Date.now()-86400000).toISOString().slice(0,10);return{config:{nome:'HostelOS',end:'Rua das Flores, 42',tel:'(47) 99999-0000',email:'contato@hostelOS.com'},quartos:[{id:1,nome:'A1',tipo:'Beliche Dorm',cap:1,diaria:60,status:'ocupado',andar:'Térreo',obs:''},{id:2,nome:'A2',tipo:'Beliche Dorm',cap:1,diaria:60,status:'ocupado',andar:'Térreo',obs:''},{id:3,nome:'A3',tipo:'Beliche Dorm',cap:1,diaria:60,status:'disponivel',andar:'Térreo',obs:''},{id:4,nome:'A4',tipo:'Beliche Dorm',cap:1,diaria:60,status:'limpeza',andar:'Térreo',obs:''},{id:5,nome:'B1',tipo:'Cama Individual Dorm',cap:1,diaria:65,status:'ocupado',andar:'Térreo',obs:''},{id:6,nome:'B2',tipo:'Cama Individual Dorm',cap:1,diaria:65,status:'disponivel',andar:'Térreo',obs:''},{id:7,nome:'P01',tipo:'Privativo Casal',cap:2,diaria:180,status:'ocupado',andar:'1º',obs:''},{id:8,nome:'P02',tipo:'Privativo Twin',cap:2,diaria:160,status:'manutencao',andar:'1º',obs:'Ar condicionado com defeito'},{id:9,nome:'S01',tipo:'Suíte',cap:2,diaria:280,status:'disponivel',andar:'2º',obs:''}],reservas:[{id:1,nome:'Mihail Kovac',email:'mihail@email.com',cin:t,cout:tm,quarto:'A1',diaria:60,origem:'Booking.com',status:'pendente',num:1,obs:''},{id:2,nome:'Sophie Müller',email:'sophie@email.com',cin:ys,cout:tm,quarto:'A2',diaria:60,origem:'Direto',status:'hospedado',num:1,obs:''},{id:3,nome:'Lucas Martins',email:'lucas@email.com',cin:t,cout:tm,quarto:'P01',diaria:180,origem:'Walk-in',status:'hospedado',num:2,obs:''},{id:4,nome:'Ana Souza',email:'ana@email.com',cin:t,cout:tm,quarto:'B1',diaria:65,origem:'Airbnb',status:'hospedado',num:1,obs:''},{id:5,nome:'Tom Eriksen',email:'tom@email.com',cin:ys,cout:t,quarto:'A4',diaria:60,origem:'Booking.com',status:'hospedado',num:1,obs:''}],lancamentos:[{id:1,data:t,desc:'Reserva #3 · Lucas Martins',cat:'Hospedagem',forma:'Cartão de Crédito',tipo:'entrada',valor:360},{id:2,data:t,desc:'Reserva #4 · Ana Souza',cat:'Hospedagem',forma:'PIX',tipo:'entrada',valor:65},{id:3,data:t,desc:'Materiais de limpeza',cat:'Operacional',forma:'Dinheiro',tipo:'saida',valor:85},{id:4,data:ys,desc:'Reserva #2 · Sophie Müller',cat:'Hospedagem',forma:'PIX',tipo:'entrada',valor:180},{id:5,data:ys,desc:'Conta de água',cat:'Fixo',forma:'Débito auto',tipo:'saida',valor:340},{id:6,data:ys,desc:'Café da manhã (6 hósp.)',cat:'F&B',forma:'Mix',tipo:'entrada',valor:90}]};}
+function sDB(){localStorage.setItem(KEY,JSON.stringify(DB))}
+function nid(a){return a.length?Math.max(...a.map(x=>x.id))+1:1}
+function dd(a,b){return Math.max(1,Math.round((new Date(b)-new Date(a))/86400000))}
+function fd(d){if(!d)return'—';const[y,m,x]=d.split('-');return`${x}/${m}/${y}`}
+function fmt(n){return Number(n).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0})}
+
+function nav(p,el){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+p).classList.add('active');document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));if(el)el.classList.add('active');const t={dashboard:'Dashboard',quartos:'Quartos',reservas:'Reservas',checkin:'Check-in / Out',financeiro:'Financeiro',config:'Configurações'};document.getElementById('tb-title').textContent=t[p]||p;if(p==='dashboard')renderDash();else if(p==='quartos')renderQuartos();else if(p==='reservas')renderRes();else if(p==='checkin')renderCheckin();else if(p==='financeiro')renderFin();else if(p==='config')renderConfig()}
+function renderDash(){const today=new Date().toISOString().slice(0,10);document.getElementById('dash-sub').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});const oc=DB.quartos.filter(q=>q.status==='ocupado').length,tot=DB.quartos.length,pct=Math.round(oc/tot*100),rh=DB.lancamentos.filter(l=>l.data===today&&l.tipo==='entrada').reduce((a,l)=>a+l.valor,0),chi=DB.reservas.filter(r=>r.cin===today&&r.status==='pendente').length,cho=DB.reservas.filter(r=>r.cout===today&&r.status==='hospedado').length;document.getElementById('dash-stats').innerHTML=`<div class="sc hl"><div class="si si-p"><i class="ti ti-home"></i></div><div class="sl">Ocupação</div><div class="sv">${pct}%</div><span class="sb sb-n">${oc} de ${tot}</span></div><div class="sc hl-g"><div class="si si-g"><i class="ti ti-currency-dollar"></i></div><div class="sl">Receita hoje</div><div class="sv mn">${fmt(rh)}</div><span class="sb sb-up">↑ atualizado</span></div><div class="sc hl-a"><div class="si si-a"><i class="ti ti-door-enter"></i></div><div class="sl">Check-ins</div><div class="sv">${chi}</div><span class="sb sb-n">pendentes</span></div><div class="sc hl-r"><div class="si si-r"><i class="ti ti-door-exit"></i></div><div class="sl">Check-outs</div><div class="sv">${cho}</div><span class="sb sb-n">hoje</span></div>`;const days=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],vals=[1200,980,1540,1820,2100,2380,1840],mx=Math.max(...vals);document.getElementById('dash-chart').innerHTML=vals.map((v,i)=>`<div class="bcc"><div class="bcv">R$${(v/1000).toFixed(1)}k</div><div class="bcb" style="height:${Math.round(v/mx*100)}%;background:${i===5?'var(--cy)':'var(--ac)'};opacity:${i===6?0.4:1}"></div><div class="bcl">${days[i]}</div></div>`).join('');const tipos=[...new Set(DB.quartos.map(q=>q.tipo))];document.getElementById('dash-occ').innerHTML=tipos.map(t=>{const qs=DB.quartos.filter(q=>q.tipo===t),oc2=qs.filter(q=>q.status==='ocupado').length,p2=Math.round(oc2/qs.length*100);return`<div style="margin-bottom:14px"><div class="fxb" style="margin-bottom:6px"><span style="font-size:14px">${t}</span><span style="font-size:14px;font-weight:600">${oc2}/${qs.length}</span></div><div class="ob"><div class="of" style="width:${p2}%"></div></div></div>`}).join('');const cih=DB.reservas.filter(r=>r.cin===today);document.getElementById('dash-checkins').innerHTML=cih.length?cih.map(r=>`<div class="hc" onclick="nav('checkin',null)"><div class="hca" style="background:linear-gradient(135deg,var(--ac),var(--pk))">${r.nome.split(' ').map(x=>x[0]).slice(0,2).join('')}</div><div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:500">${r.nome}</div><div style="font-size:12px;color:var(--t3);margin-top:2px">${r.quarto} · ${dd(r.cin,r.cout)} noites</div></div><span class="badge ${r.status==='hospedado'?'bg-g':'bg-a'}">${r.status}</span></div>`).join(''):'<div style="text-align:center;padding:20px;color:var(--t3);font-size:14px">Nenhum check-in hoje</div>';const al=[];DB.reservas.filter(r=>r.cout<today&&r.status==='hospedado').forEach(r=>al.push({cls:'ai-r',icon:'ti-alert-triangle',t:'Check-out atrasado',d:`${r.nome} · ${r.quarto}`,c:'var(--rd)'}));DB.quartos.filter(q=>q.status==='manutencao').forEach(q=>al.push({cls:'ai-a',icon:'ti-tools',t:'Manutenção pendente',d:`${q.nome} — ${q.obs||'sem descrição'}`,c:'var(--am)'}));const pen=DB.reservas.filter(r=>r.cin===today&&r.status==='pendente');if(pen.length)al.push({cls:'ai-p',icon:'ti-door-enter',t:`${pen.length} check-in(s) pendente(s)`,d:'Ir para Check-in/Out',c:'var(--acl)'});if(!al.length)al.push({cls:'ai-g',icon:'ti-circle-check',t:'Tudo em ordem!',d:'Nenhuma pendência',c:'var(--gr)'});document.getElementById('dash-alerts').innerHTML=al.map(a=>`<div class="ai ${a.cls}"><div class="at" style="color:${a.c}"><i class="ti ${a.icon}" style="font-size:16px"></i>${a.t}</div><div class="ad">${a.d}</div></div>`).join('')}
+function renderQuartos(f='all'){const qs=f==='all'?DB.quartos:DB.quartos.filter(q=>q.status===f),oc=DB.quartos.filter(q=>q.status==='ocupado').length,av=DB.quartos.filter(q=>q.status==='disponivel').length,cl=DB.quartos.filter(q=>q.status==='limpeza').length;document.getElementById('qts-sub').textContent=`${DB.quartos.length} total · ${oc} ocupados · ${av} disponíveis · ${cl} em limpeza`;const tipos=[...new Set(qs.map(q=>q.tipo))];document.getElementById('qts-map').innerHTML=tipos.map(t=>{const tqs=qs.filter(q=>q.tipo===t);return`<div class="rs"><div class="rst">${t} <span style="font-size:13px;font-weight:400;color:var(--t3)">${tqs.length} acomodações</span></div><div class="rm">${tqs.map(q=>{const cls={disponivel:'t-av',ocupado:'t-oc',limpeza:'t-cl',manutencao:'t-mn'}[q.status]||'',lb={disponivel:'Disponível',ocupado:'Ocupado',limpeza:'Limpeza',manutencao:'Manutenção'}[q.status],res=DB.reservas.find(r=>r.quarto===q.nome&&r.status==='hospedado');return`<div class="rt ${cls}" onclick="openRoomDetail(${q.id})"><div class="rt-n">${q.nome}</div><div class="rt-t">${q.tipo}</div><div class="rt-p">${lb}</div><div class="rt-g">${res?res.nome:'R$ '+q.diaria+'/nt'}</div></div>`}).join('')}</div></div>`}).join('')}
+function filterRooms(v){renderQuartos(v)}
+function openRoomDetail(id){const q=DB.quartos.find(x=>x.id===id);if(!q)return;const res=DB.reservas.find(r=>r.quarto===q.nome&&r.status==='hospedado'),cls={disponivel:'bg-g',ocupado:'bg-r',limpeza:'bg-a',manutencao:'bg-p'}[q.status]||'bg-n';document.getElementById('mroom-title').textContent=`Quarto ${q.nome}`;document.getElementById('mroom-body').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;font-size:14px"><div><span style="color:var(--t3)">Tipo</span><div style="font-weight:500;margin-top:3px">${q.tipo}</div></div><div><span style="color:var(--t3)">Cap.</span><div style="font-weight:500;margin-top:3px">${q.cap} pessoa(s)</div></div><div><span style="color:var(--t3)">Andar</span><div style="font-weight:500;margin-top:3px">${q.andar||'—'}</div></div><div><span style="color:var(--t3)">Diária</span><div style="font-family:var(--fh);font-size:18px;font-weight:700;color:var(--acl);margin-top:3px">R$ ${q.diaria}</div></div></div><div style="margin-bottom:16px"><span class="badge ${cls}">${q.status}</span>${q.obs?`<span style="font-size:13px;color:var(--t3);margin-left:10px">${q.obs}</span>`:''}</div>${res?`<div style="padding:14px;background:var(--s2);border-radius:10px;border:1px solid var(--b1);margin-bottom:16px"><div style="font-size:14px;font-weight:500;margin-bottom:6px">${res.nome}</div><div style="font-size:13px;color:var(--t3)">${fd(res.cin)} → ${fd(res.cout)} · ${dd(res.cin,res.cout)} noites · R$ ${fmt(dd(res.cin,res.cout)*res.diaria)}</div></div>`:''}<div class="fxc gap8"><button class="btn btn-g" onclick="closeModal('modal-room')">Fechar</button><button class="btn" style="flex:1" onclick="editQrt(${id})"><i class="ti ti-edit"></i>Editar</button><button class="btn btn-d btn-sm" onclick="delQrt(${id})"><i class="ti ti-trash"></i></button></div>`;openModal('modal-room')}
+function editQrt(id){closeModal('modal-room');const q=DB.quartos.find(x=>x.id===id);document.getElementById('mq-title').textContent='Editar Quarto';document.getElementById('q-id').value=id;document.getElementById('q-nome').value=q.nome;document.getElementById('q-tipo').value=q.tipo;document.getElementById('q-cap').value=q.cap;document.getElementById('q-diaria').value=q.diaria;document.getElementById('q-status').value=q.status;document.getElementById('q-andar').value=q.andar||'';document.getElementById('q-obs').value=q.obs||'';openModal('modal-qrt')}
+function delQrt(id){if(!confirm('Excluir este quarto?'))return;DB.quartos=DB.quartos.filter(q=>q.id!==id);sDB();closeModal('modal-room');renderQuartos();showToast('Quarto removido','red')}
+function resetQrtForm(){document.getElementById('mq-title').textContent='Novo Quarto';['q-id','q-nome','q-andar','q-obs'].forEach(id=>document.getElementById(id).value='');document.getElementById('q-cap').value=1;document.getElementById('q-diaria').value=''}
+function saveQrt(){const nome=document.getElementById('q-nome').value.trim(),diaria=parseFloat(document.getElementById('q-diaria').value);if(!nome||isNaN(diaria)){showToast('Preencha nome e diária','red');return}const eid=parseInt(document.getElementById('q-id').value),obj={nome,tipo:document.getElementById('q-tipo').value,cap:parseInt(document.getElementById('q-cap').value)||1,diaria,status:document.getElementById('q-status').value,andar:document.getElementById('q-andar').value,obs:document.getElementById('q-obs').value};if(eid)Object.assign(DB.quartos.find(q=>q.id===eid),obj);else DB.quartos.push({id:nid(DB.quartos),...obj});sDB();closeModal('modal-qrt');renderQuartos();showToast(eid?'Quarto atualizado!':'Quarto adicionado!')}
+function renderRes(q=''){const list=q?DB.reservas.filter(r=>r.nome.toLowerCase().includes(q.toLowerCase())):DB.reservas,sc={pendente:'bg-a',hospedado:'bg-g',checkout:'bg-c',cancelado:'bg-r'};document.getElementById('res-sub').textContent=`${DB.reservas.length} reservas · ${DB.reservas.filter(r=>r.status==='hospedado').length} hóspedes ativos`;document.getElementById('res-tbody').innerHTML=list.sort((a,b)=>b.id-a.id).map(r=>{const n=dd(r.cin,r.cout);return`<tr><td style="color:var(--t3);font-size:13px">#${String(r.id).padStart(4,'0')}</td><td><div style="font-weight:500">${r.nome}</div><div style="font-size:12px;color:var(--t3)">${r.email||'—'}</div></td><td><span style="font-family:var(--fh);font-weight:600">${r.quarto}</span></td><td>${fd(r.cin)}</td><td>${fd(r.cout)}</td><td><span style="cursor:pointer;border-bottom:1px dashed var(--t3);font-family:var(--fh);font-weight:600" onclick="editDiaria(${r.id})">R$ ${fmt(r.diaria)}</span></td><td style="font-family:var(--fh);font-weight:600">R$ ${fmt(n*r.diaria)}</td><td><span class="badge bg-n">${r.origem}</span></td><td><span class="badge ${sc[r.status]||'bg-n'}">${r.status}</span></td><td><div class="fxc gap6"><button class="btn btn-xs" onclick="editRes(${r.id})"><i class="ti ti-edit"></i></button><button class="btn btn-xs btn-d" onclick="delRes(${r.id})"><i class="ti ti-trash"></i></button></div></td></tr>`}).join('')}
+function filterRes(v){renderRes(v)}
+function editDiaria(id){const r=DB.reservas.find(x=>x.id===id),v=prompt('Nova diária (R$):',r.diaria);if(v===null)return;const n=parseFloat(v);if(isNaN(n)||n<=0){showToast('Valor inválido','red');return}r.diaria=n;sDB();renderRes();showToast('Diária atualizada!')}
+function editRes(id){const r=DB.reservas.find(x=>x.id===id);document.getElementById('mr-title').textContent='Editar Reserva';document.getElementById('r-id').value=id;document.getElementById('r-nome').value=r.nome;document.getElementById('r-email').value=r.email||'';document.getElementById('r-cin').value=r.cin;document.getElementById('r-cout').value=r.cout;document.getElementById('r-num').value=r.num||1;document.getElementById('r-diaria').value=r.diaria;document.getElementById('r-origem').value=r.origem;document.getElementById('r-status').value=r.status;document.getElementById('r-obs').value=r.obs||'';popQS(r.quarto);openModal('modal-res')}
+function delRes(id){if(!confirm('Excluir esta reserva?'))return;DB.reservas=DB.reservas.filter(r=>r.id!==id);sDB();renderRes();showToast('Reserva removida','red')}
+function resetResForm(){document.getElementById('mr-title').textContent='Nova Reserva';document.getElementById('r-id').value='';['r-nome','r-email','r-obs'].forEach(id=>document.getElementById(id).value='');document.getElementById('r-cin').value=new Date().toISOString().slice(0,10);document.getElementById('r-cout').value='';document.getElementById('r-num').value=1;document.getElementById('r-diaria').value='';popQS()}
+function popQS(sel=''){const s=document.getElementById('r-quarto');s.innerHTML=DB.quartos.map(q=>`<option value="${q.nome}" ${q.nome===sel?'selected':''}>${q.nome} — ${q.tipo} (R$${q.diaria})</option>`).join('');if(!sel&&DB.quartos.length){const q=DB.quartos.find(q=>q.nome===s.value);if(q&&!document.getElementById('r-diaria').value)document.getElementById('r-diaria').value=q.diaria}}
+document.addEventListener('change',e=>{if(e.target.id==='r-quarto'){const q=DB.quartos.find(x=>x.nome===e.target.value);if(q)document.getElementById('r-diaria').value=q.diaria}});
+function saveRes(){const nome=document.getElementById('r-nome').value.trim(),ci=document.getElementById('r-cin').value,co=document.getElementById('r-cout').value,d=parseFloat(document.getElementById('r-diaria').value);if(!nome||!ci||!co||isNaN(d)){showToast('Preencha os campos obrigatórios','red');return}if(ci>=co){showToast('Check-out deve ser após check-in','red');return}const eid=parseInt(document.getElementById('r-id').value),obj={nome,email:document.getElementById('r-email').value,cin:ci,cout:co,quarto:document.getElementById('r-quarto').value,diaria:d,origem:document.getElementById('r-origem').value,status:document.getElementById('r-status').value,num:parseInt(document.getElementById('r-num').value)||1,obs:document.getElementById('r-obs').value};if(eid)Object.assign(DB.reservas.find(r=>r.id===eid),obj);else DB.reservas.push({id:nid(DB.reservas),...obj});sDB();closeModal('modal-res');renderRes();showToast(eid?'Reserva atualizada!':'Reserva criada!')}
+function renderCheckin(){ciRes=null;const ci=document.getElementById('ci-search');if(ci)ci.value='';document.getElementById('ci-results').innerHTML='';ciGo(0);const today=new Date().toISOString().slice(0,10),co=DB.reservas.filter(r=>r.cout<=today&&r.status==='hospedado');document.getElementById('co-list').innerHTML=co.length?co.map(r=>`<div class="fxb" style="padding:12px 0;border-bottom:1px solid var(--b1)"><div><div style="font-size:14px;font-weight:500">${r.nome} ${r.cout<today?'<span style="color:var(--rd);font-size:12px;font-weight:600">ATRASADO</span>':''}</div><div style="font-size:13px;color:var(--t3);margin-top:2px">${r.quarto} · R$ ${fmt(dd(r.cin,r.cout)*r.diaria)}</div></div><button class="btn btn-sm btn-d" onclick="doCheckout(${r.id})">Check-out</button></div>`).join(''):'<div style="color:var(--t3);font-size:14px;padding:16px;text-align:center">Nenhum check-out pendente</div>';const ha=DB.reservas.filter(r=>r.status==='hospedado');document.getElementById('hospedes-ativos').innerHTML=ha.length?`<table class="dt" style="font-size:13px"><thead><tr><th>Hóspede</th><th>Quarto</th><th>Saída</th></tr></thead><tbody>${ha.map(r=>`<tr><td>${r.nome}</td><td style="font-weight:600">${r.quarto}</td><td>${fd(r.cout)}</td></tr>`).join('')}</tbody></table>`:'<div style="color:var(--t3);font-size:14px;padding:12px">Nenhum hóspede ativo</div>'}
+function ciSearch(v){if(!v){document.getElementById('ci-results').innerHTML='';return}const res=DB.reservas.filter(r=>(r.nome.toLowerCase().includes(v.toLowerCase())||('#'+r.id)===v)&&r.status==='pendente');document.getElementById('ci-results').innerHTML=res.length?res.map(r=>`<div class="cir" onclick="selCiRes(${r.id})"><div><div style="font-size:14px;font-weight:500">${r.nome}</div><div style="font-size:13px;color:var(--t3);margin-top:2px">${r.quarto} · ${fd(r.cin)} → ${fd(r.cout)}</div></div><button class="btn btn-sm btn-p">Selecionar</button></div>`).join(''):'<div style="color:var(--t3);font-size:14px;padding:12px">Nenhuma reserva pendente encontrada</div>'}
+function selCiRes(id){ciRes=DB.reservas.find(r=>r.id===id);document.getElementById('ci-nome').value=ciRes.nome;document.getElementById('ci-email').value=ciRes.email||'';document.getElementById('ci-nac').value='';document.getElementById('ci-doc').value='';ciGo(1)}
+function ciGo(n){for(let i=0;i<3;i++){document.querySelectorAll('.step')[i].className='step'+(i===n?' active':i<n?' done':'');document.getElementById('ci-s'+i).style.display=i===n?'block':'none'}if(n===2&&ciRes){const noites=dd(ciRes.cin,ciRes.cout);document.getElementById('ci-resumo').innerHTML=`<div style="padding:16px;background:var(--grd);border:1px solid rgba(52,211,153,.25);border-radius:12px"><div style="font-size:14px;font-weight:600;color:var(--gr);margin-bottom:12px;display:flex;align-items:center;gap:6px"><i class="ti ti-circle-check"></i>Dados confirmados</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:14px"><div><div style="color:var(--t3);font-size:12px">Hóspede</div><div style="font-weight:500;margin-top:2px">${ciRes.nome}</div></div><div><div style="color:var(--t3);font-size:12px">Quarto</div><div style="font-weight:600;margin-top:2px;font-family:var(--fh)">${ciRes.quarto}</div></div><div><div style="color:var(--t3);font-size:12px">Noites</div><div style="font-weight:500;margin-top:2px">${noites}</div></div><div><div style="color:var(--t3);font-size:12px">Total</div><div style="font-family:var(--fh);font-size:18px;font-weight:700;color:var(--gr);margin-top:2px">R$ ${fmt(noites*ciRes.diaria)}</div></div></div></div>`}}
+function finalizarCheckin(){if(!ciRes){showToast('Selecione uma reserva primeiro','red');return}ciRes.status='hospedado';const q=DB.quartos.find(q=>q.nome===ciRes.quarto);if(q)q.status='ocupado';const noites=dd(ciRes.cin,ciRes.cout);DB.lancamentos.push({id:nid(DB.lancamentos),data:new Date().toISOString().slice(0,10),desc:`Reserva #${ciRes.id} · ${ciRes.nome}`,cat:'Hospedagem',forma:document.getElementById('ci-pagto').value,tipo:'entrada',valor:noites*ciRes.diaria});sDB();ciRes=null;renderCheckin();showToast('Check-in realizado com sucesso!')}
+function doCheckout(id){const r=DB.reservas.find(x=>x.id===id);r.status='checkout';const q=DB.quartos.find(q=>q.nome===r.quarto);if(q)q.status='limpeza';sDB();renderCheckin();showToast('Check-out realizado. Quarto em limpeza.')}
+function renderFin(){const today=new Date().toISOString().slice(0,10),mes=today.slice(0,7),em=DB.lancamentos.filter(l=>l.data.startsWith(mes)&&l.tipo==='entrada').reduce((a,l)=>a+l.valor,0),sm=DB.lancamentos.filter(l=>l.data.startsWith(mes)&&l.tipo==='saida').reduce((a,l)=>a+l.valor,0),lc=em-sm;document.getElementById('fin-sub').textContent=new Date().toLocaleDateString('pt-BR',{month:'long',year:'numeric'});document.getElementById('fin-metrics').innerHTML=`<div class="sc hl-g"><div class="si si-g"><i class="ti ti-trending-up"></i></div><div class="sl">Receita do mês</div><div class="sv mn">${fmt(em)}</div><span class="sb sb-up">entradas</span></div><div class="sc hl-r"><div class="si si-r"><i class="ti ti-trending-down"></i></div><div class="sl">Despesas</div><div class="sv mn">${fmt(sm)}</div><span class="sb sb-dn">saídas</span></div><div class="sc hl"><div class="si si-p"><i class="ti ti-wallet"></i></div><div class="sl">Lucro líquido</div><div class="sv mn" style="color:${lc>=0?'var(--gr)':'var(--rd)'}">${fmt(lc)}</div><span class="sb ${lc>=0?'sb-up':'sb-dn'}">Margem ${em?Math.round(lc/em*100):0}%</span></div>`;const eh=DB.lancamentos.filter(l=>l.data===today&&l.tipo==='entrada').reduce((a,l)=>a+l.valor,0),sh=DB.lancamentos.filter(l=>l.data===today&&l.tipo==='saida').reduce((a,l)=>a+l.valor,0),hl=DB.lancamentos.filter(l=>l.data===today);document.getElementById('caixa-hoje').innerHTML=`${hl.map(l=>`<div class="li"><div><div class="ld">${l.desc}</div><div class="ls">${l.forma}</div></div><div class="lv ${l.tipo==='entrada'?'lp':'ln'}">${l.tipo==='entrada'?'+':'-'} R$ ${fmt(l.valor)}</div></div>`).join('')}${!hl.length?'<div style="color:var(--t3);font-size:14px;text-align:center;padding:20px">Nenhum lançamento hoje</div>':''}<div class="li" style="border-top:1px solid var(--b2);padding-top:12px;margin-top:6px"><div style="font-size:15px;font-weight:600">Saldo do dia</div><div class="lv lp" style="font-size:20px;font-family:var(--fh)">R$ ${fmt(eh-sh)}</div></div>`;const formas=['PIX','Cartão de Crédito','Cartão de Débito','Dinheiro'],tf=formas.map(f=>({f,v:DB.lancamentos.filter(l=>l.forma===f&&l.tipo==='entrada').reduce((a,l)=>a+l.valor,0)})),mf=Math.max(...tf.map(x=>x.v))||1;document.getElementById('fin-pagtos').innerHTML=tf.map(({f,v})=>`<div style="margin-bottom:14px"><div class="fxb" style="margin-bottom:6px"><span style="font-size:14px">${f}</span><span style="font-size:14px;font-weight:600;font-family:var(--fh)">R$ ${fmt(v)}</span></div><div class="ob"><div class="of" style="width:${Math.round(v/mf*100)}%"></div></div></div>`).join('');renderExtrato('all')}
+function renderExtrato(f){const list=f==='all'?DB.lancamentos:DB.lancamentos.filter(l=>l.tipo===f);document.getElementById('extrato-tbody').innerHTML=list.sort((a,b)=>b.id-a.id).map(l=>`<tr><td style="color:var(--t3);font-size:13px">${fd(l.data)}</td><td style="font-weight:500">${l.desc}</td><td><span class="badge ${l.tipo==='entrada'?'bg-g':'bg-r'}">${l.cat}</span></td><td style="color:var(--t2);font-size:13px">${l.forma}</td><td><span class="badge ${l.tipo==='entrada'?'bg-g':'bg-r'}">${l.tipo}</span></td><td style="font-family:var(--fh);font-weight:600;font-size:15px;color:${l.tipo==='entrada'?'var(--gr)':'var(--rd)'}">${l.tipo==='entrada'?'+':'-'} R$ ${fmt(l.valor)}</td><td><button class="btn btn-xs btn-d" onclick="delLanc(${l.id})"><i class="ti ti-trash"></i></button></td></tr>`).join('')}
+function delLanc(id){if(!confirm('Excluir lançamento?'))return;DB.lancamentos=DB.lancamentos.filter(l=>l.id!==id);sDB();renderFin();showToast('Lançamento removido','red')}
+function resetLancForm(){document.getElementById('l-valor').value='';document.getElementById('l-desc').value=''}
+function saveLanc(){const desc=document.getElementById('l-desc').value.trim(),valor=parseFloat(document.getElementById('l-valor').value);if(!desc||isNaN(valor)||valor<=0){showToast('Preencha descrição e valor','red');return}DB.lancamentos.push({id:nid(DB.lancamentos),data:new Date().toISOString().slice(0,10),desc,cat:document.getElementById('l-cat').value,forma:document.getElementById('l-forma').value,tipo:document.getElementById('l-tipo').value,valor});sDB();closeModal('modal-lanc');renderFin();showToast('Lançamento salvo!')}
+function exportCSV(){const rows=[['Data','Descrição','Categoria','Forma','Tipo','Valor'],...DB.lancamentos.map(l=>[l.data,`"${l.desc}"`,l.cat,l.forma,l.tipo,l.valor])],a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(rows.map(r=>r.join(',')).join('\n'));a.download='financeiro_hostelOS.csv';a.click();showToast('CSV exportado!')}
+function renderConfig(){document.getElementById('cfg-nome').value=DB.config.nome||'';document.getElementById('cfg-end').value=DB.config.end||'';document.getElementById('cfg-tel').value=DB.config.tel||'';document.getElementById('cfg-email').value=DB.config.email||'';document.getElementById('tarifas-list').innerHTML=DB.quartos.map(q=>`<div class="fxb" style="padding:11px 0;border-bottom:1px solid var(--b1)"><div><div style="font-size:14px;font-weight:500">${q.nome}</div><div style="font-size:12px;color:var(--t3);margin-top:2px">${q.tipo}</div></div><div class="fxc gap8"><span style="font-size:13px;color:var(--t3)">R$</span><input class="fi" type="number" id="tar-${q.id}" value="${q.diaria}" style="width:90px;padding:7px 10px;font-size:14px;font-weight:600;font-family:var(--fh)" step="0.01" min="0"></div></div>`).join('')}
+function saveConfig(){DB.config.nome=document.getElementById('cfg-nome').value;DB.config.end=document.getElementById('cfg-end').value;DB.config.tel=document.getElementById('cfg-tel').value;DB.config.email=document.getElementById('cfg-email').value;sDB();showToast('Configurações salvas!')}
+function saveTarifas(){DB.quartos.forEach(q=>{const el=document.getElementById('tar-'+q.id);if(el){const v=parseFloat(el.value);if(!isNaN(v)&&v>0)q.diaria=v}});sDB();showToast('Tarifas atualizadas!')}
+function openModal(id,fn){if(fn)fn();document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
+let tT;
+function showToast(msg,type='green'){const t=document.getElementById('toast');document.getElementById('tdot').style.background=type==='green'?'var(--gr)':'var(--rd)';document.getElementById('tmsg').textContent=msg;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),3200)}
+document.getElementById('tb-date').textContent=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'});
+renderDash();
+</script>
+</body>
+</html>
